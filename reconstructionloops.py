@@ -19,10 +19,10 @@ def simplerec(mexp, iterations=10, mode='shg', pulse=None, gatepulse=None):
         #    GPS = np.roll(np.fft.fft(np.roll(gatepulse,n2)), n2)
         #    gatepulse = np.roll( np.fft.ifft( np.roll( np.abs(extspec[1]) * np.exp(1.0j * np.angle(GPS)), n2)), n2)
     rd = {'errors': errors, 'sp': sps, 'gp': gps, 'exp': mexp}
-    # print(np.nonzero(np.isnan(rd['errors'])))
     minerr = np.min(rd['errors'])
     indx = np.nonzero(minerr == rd['errors'])[0][0]
     rd['minerror'] = minerr
     rd['min_sp'] = rd['sp'][indx]
     rd['min_gp'] = rd['gp'][indx]
+    rd['mode']=mode
     return rd

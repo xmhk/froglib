@@ -47,13 +47,11 @@ def pcgpstep(mexp, pulse, gatepulse, mode='shg'):
     for i in range(nn):
         m4[i, :] = np.roll(np.fft.ifft(np.roll(m3[i, :], -n2)), n2)
     for i in range(n2 - 1, -n2, -1):
-        m5[i + n2, :] = np.roll(m4[:, i + n2], i)  # zeit-zeit
-    #m5 = np.fliplr(m5)
+        m5[i + n2, :] = np.roll(m4[:, i + n2], i)  # time-time
     if True:
         # full SVD
         u, w, v = np.linalg.svd(m5)
         pulse = u[:, 0]
-        #gatepulse = np.conjugate( v[0, :] )
         gatepulse = v[0, :]
     else:
         #  power method
