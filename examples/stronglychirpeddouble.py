@@ -8,9 +8,7 @@ from froglib import *
 
 M = np.loadtxt("example_data/stronglychirpeddouble.dat")
 Mexp = np.sqrt(M)
-
 res = mixfrog(Mexp, startnum=10, plot=True )
-
 
 plt.show()
 

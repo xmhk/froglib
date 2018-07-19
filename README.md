@@ -32,7 +32,7 @@ Projection) algorithm
 ## Usage
 
 ### generate FROG traces: **frogtr**
-    
+ ![example frog traces](examples/pics/example_traces.png)    
 ```
     import numpy as np
     from matplotlib import pyplot as plt
@@ -68,13 +68,14 @@ Projection) algorithm
         ax.set_ylabel("freq")
 ```
    
- ![example frog traces](examples/pics/example_traces.png)
+
 
 
    
 
-### simple, single reconstruction
-
+### simple, single reconstruction: **simplerec**
+ ![example reconstruction error](examples/pics/rec_artif_shg0.png)
+ ![example reconstruction](examples/pics/rec_artif_shg.png)
 ```
 import numpy as np
 from matplotlib import pyplot as plt
@@ -99,5 +100,52 @@ res = simplerec(Mexp, iterations=150)
 simplerecresult(Mexp, res)
 plt.show()
 ```
- ![example reconstruction](examples/pics/rec_artif_shg0.png)
- ![example reconstruction](examples/pics/rec_artif_shg.png)
+
+The result of the reconstruction is stored in the dictionary *res*:
+
+``` 
+    (keys) : (values)
+    errors : Array holding Frog error for each iteration
+    gp, sp :  Arrays with signal and gate fields for each iteration
+    minerror : minimal Frog error that occured during iterations
+    min_sp, min_gp : signal and gate pulses for minimal Frog error
+    mode : mode used ('shg' or 'blind')
+    exp : experimental trace (amplitude)
+```
+
+
+### more advanced reconstruction loop: mixfrog
+
+The basic idea behind this is to make several attempts to reconstruct a trace.
+Each attempt initially is only iterated some steps. Then, the best 'candidate' is 
+chosen and iterated fully.
+Both SHG and Blind FROG reconstructions are attempted. Usually, due to the fact that
+experimental SHG FROG traces show a slight asymmetric shape, be it due to noise or misalignment,
+the Blind part will give better result.
+
+When SHG traces are reconstructed with in 'blind' mode, both reconstructed signal and gate pulse
+will look very similar albeit phase/time ambiguities.
+
+For more information, see 
+
+```
+Hause, A., et al. "Reliable multiple-pulse reconstruction from second-harmonic-generation 
+frequency-resolved optical gating spectrograms." JOSA B 32.5 (2015): 868-877.
+``` 
+
+![error for different attempts](examples/pics/mix0.png)
+![error for different attempts](examples/pics/mix1.png)
+![error for different attempts](examples/pics/mix2.png)
+```
+import numpy as np
+from matplotlib import pyplot as plt
+from froglib import *
+
+
+M = np.loadtxt("example_data/stronglychirpeddouble.dat")
+Mexp = np.sqrt(M)
+res = mixfrog(Mexp, startnum=10, plot=True )
+
+plt.show()
+```
+

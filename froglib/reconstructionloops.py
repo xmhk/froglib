@@ -134,7 +134,10 @@ def mixfrog(mexp, startnum=3, startite=20, itestep2=100, plot=False):
                    iterations=itestep2)
     if plot:
         plt.figure(figsize=(5,2))
-        plt.plot(errors)
+        plt.plot(errors, 'o')
+        plt.axvline(x=startnum-1, lw=0.8, c='0.0', dashes=(5,1))
+        plt.xlabel("Round no")
+        plt.ylabel("Frog error")
         simplerecresult(mexp, rd)
     return rd
 

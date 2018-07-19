@@ -33,5 +33,4 @@ plt.imshow(np.abs(F3)**2)
 for ax in [ax1,ax2,ax3]:
     ax.set_xlabel("time")
     ax.set_ylabel("freq")
-plt.savefig("pics/example_traces.png")
 plt.show()
