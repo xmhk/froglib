@@ -1,3 +1,26 @@
+"""
+This file is part of froglib, which allows the creation
+and reconstruction of FROG traces.
+
+froglib is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+froglib is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with froglib.  If not, see <http://www.gnu.org/licenses/>.
+
+Contributors:
+
+Christoph Mahnke, 2018
+
+"""
+
 import numpy as np
 
 def gaussianrandomphase(n):
@@ -60,7 +83,7 @@ def frogtr(field1, field2, mode='shg'):
 def pcgpstep(mexp, pulse, gatepulse, mode='shg', svd='full'):
     """Make a step in the pcgp algorithm.
 
-    This function implements the PCGP Algoritm describe in Rick Trebinos Book
+    This function implements the PCGP Algorithm as describe in Rick Trebino's Book:
 
     Trebino, Rick. Frequency-resolved optical gating: the measurement of
     ultrashort laser pulses. Springer Science & Business Media, 2012.
